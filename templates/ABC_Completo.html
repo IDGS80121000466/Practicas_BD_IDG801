@@ -27,8 +27,8 @@
                     <td>{{ emple.telefono }}</td>
                     <td>{{ emple.correo }}</td>
                     <td>{{ emple.sueldo }}</td>
-                    <td><a href="eliminar.html?id={{ emple.id }}" class="btn btn-danger">Eliminar</a></td>
-                    <td><a href="modificar.html?id={{ emple.id }}" class="btn btn-warning">Modificar</a></td>
+                    <td><a href="eliminar?id={{ emple.id }}" class="btn btn-danger">Eliminar</a></td>
+                    <td><a href="modificar?id={{ emple.id }}" class="btn btn-warning">Modificar</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

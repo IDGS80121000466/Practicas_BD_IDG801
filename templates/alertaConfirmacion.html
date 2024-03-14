@@ -1,0 +1,25 @@
+{% extends "layout2.html" %}
+{% block container %}
+    {% from "_macros.html" import camposNuevos %}
+    <div style="background-color: #c9ebf6;">
+        <div class="container bg-light my-3 p-3" style="background-color: #a5e7fc; border-radius: 5px;">
+            <h1 class="text-center">Confirmar Compra</h1>
+            <form name="sent" action="/guardarDetalleVenta" id="contactForm" method="POST">   
+                {{ form.csrf_token }}
+                {{ formBVenta.csrf_token }}                       
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <br>
+                <h2 class="text-center">¿Estas Seguro de hacer la compra?</h2>
+                <h2 class="text-center">Total de Ventas: {{ total_ventas }}</h2>
+                <div class="span3 offset4">
+                    <div class="p-3 rounded" style="margin: 0 5px; background-color: #a5e7fc;">
+                        <input type="submit" class="btn btn-success" id="guardarDetalleVenta" name="guardarDetalleVenta" value="Si, realizar compra">
+                        <a href="mostrarPizzas" class="btn btn-danger"><i class="icon-undo icon-white"></i>Cancelar</a>  
+                    </div>
+                </div>               
+            </form>
+            
+        </div>
+        <br><br>
+    </div>
+{% endblock %}

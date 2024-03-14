@@ -1,0 +1,73 @@
+{% from "_macros.html" import camposNuevos %}
+<div class="container bg-light my-3 p-3" style="background-color: #a5e7fc; border-radius: 5px;">
+    <h3 class="text-center">Busqueda  ventas por dia / mes:</h3>
+<form name="sent" action="/buscarVentas" id="contactForm1" method="POST">
+    {{ form.csrf_token }}
+    {{ formBVenta.csrf_token }}
+    <div class="row text-center">
+        <div class="span4">
+            <div class="form-group">
+                {{ camposNuevos(formBVenta.dia, class='form-control') }}
+            </div>
+        </div>
+        <div class="span4">
+            <div class="form-group">
+                {{ camposNuevos(formBVenta.mes, class='form-control') }}
+            </div>
+        </div>
+        <div class="span4">
+            <div class="form-group">
+                {{ camposNuevos(formBVenta.anio, class='form-control') }}
+            </div>
+        </div>
+        <div class="span4">
+            <div class="form-group">
+                {{ camposNuevos(formBVenta.diaTexto, class='form-control') }}
+            </div>
+        </div>
+        <div class="span4">
+            <div class="form-group">
+                {{ camposNuevos(formBVenta.mesTexto, class='form-control') }}
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <input type="submit" id="send-signup" name="signup" value="Buscar" class="btn btn-primary" />
+    </div>
+</form>
+{% if ventas %}
+    <div class="row">
+        <div class="col">
+            <h4 class="text-center">Resultados de la búsqueda:</h4>
+            <div class="table-responsive"> <!-- Agregar esta clase -->
+                <table class="table table-striped table-bordered" style="margin: 0 auto;">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Fecha de Compra</th>
+                            <th>Tamaño</th>
+                            <th>Ingredientes</th>
+                            <th>Número de Pizzas</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for venta in ventas %}
+                            <tr>
+                                <td>{{ venta.nombre }}</td>
+                                <td>{{ venta.fechaCompra }}</td>
+                                <td>{{ venta.tamano }}</td>
+                                <td>{{ venta.ingredientes }}</td>
+                                <td>{{ venta.numeroPizzas }}</td>
+                                <td>{{ venta.subtotal }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <h3 class="text-center">Total de Ventas: {{ totalVentasB }}</h3>
+            </div>
+        </div>
+    </div>
+{% endif %}
+</div>
+<br><br><br>

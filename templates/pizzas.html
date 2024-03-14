@@ -1,0 +1,125 @@
+{% extends "layout2.html" %}
+{% block container %}
+{% from "_macros.html" import camposNuevos %}
+<div style="background-color: #c9ebf6;">
+    <div class="container bg-light my-3 p-3" style="background-color: #a5e7fc; border-radius: 5px;">
+        <h1 class="text-center">Pizzas</h1>
+        <form name="sent" action="/pizza" id="contactForm" method="POST">
+            {{ form.csrf_token }}
+            {{ formBVenta.csrf_token }}
+            <div class="row">
+                <div class="span4">
+                    <div class="form-group">
+                        Nombre<br>
+                        <input type="text" name="nombre" value="{{ cliente.nombre if cliente is defined else '' }}" class="form-control">
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="form-group">
+                        Direccion<br>
+                        <input type="text" name="direccion" value="{{ cliente.direccion if cliente is defined else '' }}" class="form-control">
+
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="form-group">
+                        Telefono<br>
+                        <input type="text" name="telefono" value="{{ cliente.telefono if cliente is defined else '' }}" class="form-control" maxlength="10">
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="form-group">
+                        <div class="input-group date" id="datetimepicker">
+                            {{ camposNuevos(form.fecha, class='form-control') }}
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="row">
+                <div class="span3">
+                    <div class="p-3 rounded text-center" style="margin: 0 5px; background-color: #82d2ec;">
+                        <span class="text-center">Tamaño pizza</span>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tamano" id="chica" value="chica">
+                            <span class="form-check-label" for="chica">Chica $40</span>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tamano" id="mediana" value="mediana">
+                            <span class="form-check-label" for="mediana">Mediana $80</span>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tamano" id="grande" value="grande">
+                            <span class="form-check-label" for="grande">Grande $120</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span3">
+                    <div class="p-3 rounded text-center" style="margin: 0 5px; background-color: #82d2ec;">
+                        <span class="text-center">Ingredientes</span>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="ingredientes[]" id="jamon"
+                                value="jamon">
+                            <span class="form-check-label" for="jamon">Jamón $10</span>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="ingredientes[]" id="pina"
+                                value="pina">
+                            <span class="form-check-label" for="pina">Piña $10</span>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="ingredientes[]" id="champinones"
+                                value="champinones">
+                            <span class="form-check-label" for="champinones">Champiñones $10</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span3">
+                    <div class="p-3 rounded text-center" style="margin: 0 5px; background-color: #a5e7fc;">
+                        <div class="form-group text-center">
+                            {{ camposNuevos(form.numeroPizzas, class='form-control') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="span3">
+                <div class="p-3 rounded text-center" style="margin: 0 5px; background-color: #a5e7fc;">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                    <input type="submit" id="send-signup" name="signup" value="Agregar" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <br><br>
+    <div class="row-fluid">
+        <div class="span6">
+            {% block containerTabla %}
+                {% include "mostrarPizzas.html" %}
+            {% endblock %}
+        </div>
+        <div class="span6">
+            {% block containerVenta %}
+                {% include "detalleVentasPizza.html" %}
+            {% endblock %}
+        </div>   
+    </div>
+    <br>
+    <div class="row-fluid">
+        <div class="span6 text-center">
+            {% block containerBuscarVenta %}
+                {% include "buscarVentas.html" %}
+            {% endblock %}
+        </div>
+    </div>
+     
+</div>
+
+{% endblock %}
